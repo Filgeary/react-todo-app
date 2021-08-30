@@ -8,11 +8,11 @@ import reportWebVitals from './reportWebVitals'
 
 const App = () => {
   const todoData = [
-    { label: 'Learn React', isImportant: false },
-    { label: 'Learn Redux', isImportant: false },
-    { label: 'Write Tests', isImportant: false },
-    { label: 'Learn TypeScript', isImportant: false },
-    { label: 'Find a Cool Job!', isImportant: true },
+    { id: 1, label: 'Learn React', isImportant: false },
+    { id: 2, label: 'Learn Redux', isImportant: false },
+    { id: 3, label: 'Make Tests', isImportant: false },
+    { id: 4, label: 'Learn TypeScript', isImportant: false },
+    { id: 5, label: 'Find a Cool Job!', isImportant: true },
   ]
 
   return (

@@ -3,7 +3,9 @@ import TodoListItem from './TodoListItem'
 
 const TodoList = ({ todoItems }) => {
   const todoElements = todoItems.map(item => {
-    return <li>{<TodoListItem {...item} />}</li>
+    const { id, ...restProps } = item
+
+    return <li key={id}>{<TodoListItem {...restProps} />}</li>
   })
 
   return <ul>{todoElements}</ul>
