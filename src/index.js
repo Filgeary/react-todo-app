@@ -7,11 +7,19 @@ import './index.css'
 import reportWebVitals from './reportWebVitals'
 
 const App = () => {
+  const todoData = [
+    { label: 'Learn React', isImportant: false },
+    { label: 'Learn Redux', isImportant: false },
+    { label: 'Write Tests', isImportant: false },
+    { label: 'Learn TypeScript', isImportant: false },
+    { label: 'Find a Cool Job!', isImportant: true },
+  ]
+
   return (
     <div>
       <AppHeader />
       <SearchPanel />
-      <TodoList />
+      <TodoList todoItems={todoData} />
     </div>
   )
 }
