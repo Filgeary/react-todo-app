@@ -1,32 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './components/App/App'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
-
-const AppHeader = () => <h1>My ToDo List</h1>
-
-const SearchPanel = () => {
-  return <input type="search" name="search" id="search" placeholder="Search" />
-}
-
-const TodoList = () => {
-  return (
-    <ul>
-      <li>Learn React</li>
-      <li>Build Awesome App</li>
-    </ul>
-  )
-}
-
-const App = () => {
-  return (
-    <div>
-      <AppHeader />
-      <SearchPanel />
-      <TodoList />
-    </div>
-  )
-}
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
