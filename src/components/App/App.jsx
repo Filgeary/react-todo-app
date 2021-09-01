@@ -11,7 +11,7 @@ const App = () => {
     { id: 2, label: 'Learn Redux', isImportant: false },
     { id: 3, label: 'Make Tests', isImportant: false },
     { id: 4, label: 'Learn TypeScript', isImportant: false },
-    { id: 5, label: 'Find a Cool Job!', isImportant: true },
+    { id: 5, label: 'Get a job at Google!', isImportant: true },
   ]
 
   return (
