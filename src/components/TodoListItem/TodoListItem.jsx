@@ -3,29 +3,30 @@ import './TodoListItem.css'
 
 class TodoListItem extends React.Component {
   state = {
-    done: false,
+    isDone: false,
+    isImportant: false,
   }
 
   handleClickLabel = () => {
-    this.setState({ done: true })
+    this.setState({ isDone: true })
+  }
+
+  handleClickImportant = () => {
+    this.setState({ isImportant: true })
   }
 
   render() {
-    const { label, isImportant = false } = this.props
-    const { done } = this.state
+    const { label } = this.props
+    const { isDone, isImportant } = this.state
 
-    const styles = {
-      color: isImportant ? 'steelblue' : '',
-      fontWeight: isImportant ? 'bold' : 'normal',
-    }
-
-    const cls = done ? 'done' : ''
+    let cls = ''
+    if (isDone) cls += ' done'
+    if (isImportant) cls += ' important'
 
     return (
       <span className={`todo-list-item d-flex ${cls}`}>
         <span
           className="todo-list-item-label"
-          style={styles}
           tabIndex="0"
           onClick={this.handleClickLabel}
         >
@@ -33,7 +34,11 @@ class TodoListItem extends React.Component {
         </span>
 
         <div>
-          <button type="button" className="btn btn-outline-success btn-sm ">
+          <button
+            type="button"
+            className="btn btn-outline-success btn-sm "
+            onClick={this.handleClickImportant}
+          >
             <i className="fa fa-exclamation" />
           </button>
           <button type="button" className="btn btn-outline-danger btn-sm ">
