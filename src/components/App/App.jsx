@@ -23,7 +23,7 @@ const App = () => {
         <ItemStatusFilter />
       </div>
 
-      <TodoList todoItems={todoData} />
+      <TodoList todoItems={todoData} onDeleteItem={id => console.log(id)} />
     </div>
   )
 }

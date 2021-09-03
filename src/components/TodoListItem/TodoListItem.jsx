@@ -20,7 +20,7 @@ class TodoListItem extends React.Component {
   }
 
   render() {
-    const { label } = this.props
+    const { label, onDeleteItem } = this.props
     const { isDone, isImportant } = this.state
 
     let cls = ''
@@ -45,7 +45,11 @@ class TodoListItem extends React.Component {
           >
             <i className="fa fa-exclamation" />
           </button>
-          <button type="button" className="btn btn-outline-danger btn-sm ">
+          <button
+            type="button"
+            className="btn btn-outline-danger btn-sm "
+            onClick={onDeleteItem}
+          >
             <i className="fa fa-trash-o"></i>
           </button>
         </div>
