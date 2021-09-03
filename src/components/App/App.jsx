@@ -1,5 +1,6 @@
 import React from 'react'
 import AppHeader from '../AppHeader/AppHeader'
+import ItemAddForm from '../ItemAddForm/ItemAddForm'
 import ItemStatusFilter from '../ItemStatusFilter/ItemStatusFilter'
 import SearchPanel from '../SearchPanel/SearchPanel'
 import TodoList from '../TodoList/TodoList'
@@ -26,6 +27,20 @@ class App extends React.Component {
     })
   }
 
+  handleAddItem = text => {
+    this.setState(({ todoData }) => {
+      const newItem = {
+        id: Date.now(),
+        label: text,
+        isImportant: false,
+      }
+
+      return {
+        todoData: [...todoData, newItem],
+      }
+    })
+  }
+
   render() {
     return (
       <div className="todo-app">
@@ -39,7 +54,10 @@ class App extends React.Component {
         <TodoList
           todoItems={this.state.todoData}
           onDeleteItem={this.handleDeleteItem}
+          onAddItem={this.handleAddItem}
         />
+
+        <ItemAddForm onAddItem={this.handleAddItem} />
       </div>
     )
   }
