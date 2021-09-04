@@ -69,9 +69,14 @@ class App extends React.Component {
   }
 
   render() {
+    const { todoData } = this.state
+
+    const doneTotalCount = todoData.filter(item => item.isDone).length
+    const todoTotalCount = todoData.length - doneTotalCount
+
     return (
       <div className="todo-app">
-        <AppHeader toDo={1} done={3} />
+        <AppHeader toDo={todoTotalCount} done={doneTotalCount} />
 
         <div className="top-panel d-flex">
           <SearchPanel />
@@ -79,7 +84,7 @@ class App extends React.Component {
         </div>
 
         <TodoList
-          todoItems={this.state.todoData}
+          todoItems={todoData}
           onDeleteItem={this.handleDeleteItem}
           onToggleDone={this.handleToggleDone}
           onToggleImportant={this.handleToggleImportant}
