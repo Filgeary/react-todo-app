@@ -1,0 +1,8 @@
+.item-add-form {
+  gap: 4px;
+}
+
+.item-add-form input {
+  width: auto;
+  flex-grow: 1;
+}
