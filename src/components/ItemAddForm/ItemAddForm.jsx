@@ -1,17 +1,39 @@
 import React from 'react'
+import './ItemAddForm.css'
 
-const ItemAddForm = ({ onAddItem }) => {
-  return (
-    <div>
-      <button
-        type="button"
-        className="btn btn-primary btn-lg"
-        onClick={() => onAddItem(new Date(Date.now()).toLocaleString('en-GB'))}
-      >
-        Add Item
-      </button>
-    </div>
-  )
+class ItemAddForm extends React.Component {
+  state = {
+    label: '',
+  }
+
+  handleChangeLabel = evt => {
+    this.setState({ label: evt.target.value })
+  }
+
+  handleSubmitForm = evt => {
+    evt.preventDefault()
+
+    this.props.onAddItem(this.state.label)
+  }
+
+  render() {
+    return (
+      <form className="item-add-form d-flex" onSubmit={this.handleSubmitForm}>
+        <input
+          type="text"
+          name="new-todo"
+          id="new-todo"
+          placeholder="add ToDo"
+          className="form-control"
+          onChange={this.handleChangeLabel}
+        />
+
+        <button type="submit" className="btn btn-primary ">
+          Add ToDo
+        </button>
+      </form>
+    )
+  }
 }
 
 export default ItemAddForm
