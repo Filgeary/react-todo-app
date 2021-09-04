@@ -9,14 +9,24 @@ import './App.css'
 class App extends React.Component {
   state = {
     todoData: [
-      { id: 1, label: 'Learn React', isImportant: false },
-      { id: 2, label: 'Learn Redux', isImportant: false },
-      { id: 3, label: 'Make Tests', isImportant: false },
-      { id: 4, label: 'Learn TypeScript', isImportant: false },
-      { id: 5, label: 'Get a job at Google!', isImportant: true },
+      { id: 1, label: 'Learn React', isImportant: true, isDone: false },
+      { id: 2, label: 'Learn Redux', isImportant: true, isDone: false },
+      { id: 3, label: 'Make Tests', isImportant: false, isDone: false },
+      { id: 4, label: 'Learn TypeScript', isImportant: false, isDone: false },
+      { id: 5, label: 'Get a cool Job!', isImportant: true, isDone: false },
     ],
   }
 
+  // helpers
+  toggleProp = (arr, id, propName) => {
+    const idx = arr.findIndex(elem => elem.id === id)
+    const foundItem = arr[idx]
+    const newItem = { ...foundItem, [propName]: !foundItem[propName] }
+
+    return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)]
+  }
+
+  // handlers
   handleDeleteItem = id => {
     this.setState(({ todoData }) => {
       const idx = todoData.findIndex(elem => elem.id === id)
@@ -33,6 +43,7 @@ class App extends React.Component {
         id: Date.now(),
         label: text,
         isImportant: false,
+        isDone: false,
       }
 
       return {
@@ -42,11 +53,19 @@ class App extends React.Component {
   }
 
   handleToggleDone = id => {
-    console.log('done', id)
+    this.setState(({ todoData }) => {
+      return {
+        todoData: this.toggleProp(todoData, id, 'isDone'),
+      }
+    })
   }
 
   handleToggleImportant = id => {
-    console.log('important', id)
+    this.setState(({ todoData }) => {
+      return {
+        todoData: this.toggleProp(todoData, id, 'isImportant'),
+      }
+    })
   }
 
   render() {
