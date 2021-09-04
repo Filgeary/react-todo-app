@@ -2,26 +2,15 @@ import React from 'react'
 import './TodoListItem.css'
 
 class TodoListItem extends React.Component {
-  state = {
-    isDone: false,
-    isImportant: false,
-  }
-
-  handleClickLabel = () => {
-    this.setState(prevState => {
-      return { isDone: !prevState.isDone }
-    })
-  }
-
-  handleClickImportant = () => {
-    this.setState(prevState => {
-      return { isImportant: !prevState.isImportant }
-    })
-  }
-
   render() {
-    const { label, onDeleteItem } = this.props
-    const { isDone, isImportant } = this.state
+    const {
+      label,
+      onDeleteItem,
+      onToggleDone,
+      onToggleImportant,
+      isDone,
+      isImportant,
+    } = this.props
 
     let cls = ''
     if (isDone) cls += ' done'
@@ -32,7 +21,7 @@ class TodoListItem extends React.Component {
         <span
           className="todo-list-item-label"
           tabIndex="0"
-          onClick={this.handleClickLabel}
+          onClick={onToggleDone}
         >
           {label}
         </span>
@@ -41,7 +30,7 @@ class TodoListItem extends React.Component {
           <button
             type="button"
             className="btn btn-outline-success btn-sm "
-            onClick={this.handleClickImportant}
+            onClick={onToggleImportant}
           >
             <i className="fa fa-exclamation" />
           </button>
