@@ -14,6 +14,7 @@ class ItemAddForm extends React.Component {
     evt.preventDefault()
 
     this.props.onAddItem(this.state.label)
+    this.setState({ label: '' })
   }
 
   render() {
@@ -26,6 +27,7 @@ class ItemAddForm extends React.Component {
           placeholder="add ToDo"
           className="form-control"
           onChange={this.handleChangeLabel}
+          value={this.state.label}
         />
 
         <button type="submit" className="btn btn-primary ">
