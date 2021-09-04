@@ -54,7 +54,6 @@ class App extends React.Component {
         <TodoList
           todoItems={this.state.todoData}
           onDeleteItem={this.handleDeleteItem}
-          onAddItem={this.handleAddItem}
         />
 
         <ItemAddForm onAddItem={this.handleAddItem} />
