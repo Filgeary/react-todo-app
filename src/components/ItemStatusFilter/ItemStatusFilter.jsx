@@ -1,19 +1,29 @@
 import React from 'react'
 
-const ItemStatusFilter = () => {
-  return (
-    <div className="btn-group">
-      <button type="button" className="btn btn-info">
-        All
+const buttonsList = [
+  { filter: 'all', title: 'All' },
+  { filter: 'active', title: 'Active' },
+  { filter: 'done', title: 'Done' },
+]
+
+const ItemStatusFilter = ({ filterValue, onChangeFilter }) => {
+  const buttonsElements = buttonsList.map(({ filter, title }) => {
+    const isActive = filter === filterValue
+    const cls = 'btn ' + (isActive ? 'btn-info' : 'btn-outline-secondary')
+
+    return (
+      <button
+        key={filter}
+        type="button"
+        className={cls}
+        onClick={() => onChangeFilter(filter)}
+      >
+        {title}
       </button>
-      <button type="button" className="btn btn-outline-secondary">
-        Active
-      </button>
-      <button type="button" className="btn btn-outline-secondary">
-        Done
-      </button>
-    </div>
-  )
+    )
+  })
+
+  return <div className="btn-group">{buttonsElements}</div>
 }
 
 export default ItemStatusFilter
