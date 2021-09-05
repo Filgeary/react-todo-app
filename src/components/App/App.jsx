@@ -9,7 +9,7 @@ import './App.css'
 class App extends React.Component {
   state = {
     todoData: [
-      { id: 1, label: 'Learn JavaScript', isImportant: true, isDone: false },
+      { id: 1, label: 'Learn JavaScript', isImportant: true, isDone: true },
       { id: 2, label: 'Learn React', isImportant: true, isDone: false },
       { id: 3, label: 'Learn Redux', isImportant: true, isDone: false },
       { id: 4, label: 'Make Tests', isImportant: false, isDone: false },
