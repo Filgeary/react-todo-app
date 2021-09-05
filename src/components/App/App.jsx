@@ -15,9 +15,12 @@ class App extends React.Component {
       { id: 4, label: 'Make Tests', isImportant: false, isDone: false },
       { id: 5, label: 'Learn TypeScript', isImportant: false, isDone: false },
     ],
+    searchValue: '',
   }
 
   // helpers
+  // =================================================
+
   toggleProp = (arr, id, propName) => {
     const idx = arr.findIndex(elem => elem.id === id)
     const foundItem = arr[idx]
@@ -26,7 +29,17 @@ class App extends React.Component {
     return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)]
   }
 
+  findItems = (itemsList, searchValue) => {
+    if (searchValue.length === 0) return itemsList
+
+    return itemsList.filter(item => {
+      return item.label.toLowerCase().includes(searchValue.toLowerCase())
+    })
+  }
+
   // handlers
+  // =================================================
+
   handleDeleteItem = id => {
     this.setState(({ todoData }) => {
       const idx = todoData.findIndex(elem => elem.id === id)
@@ -68,8 +81,13 @@ class App extends React.Component {
     })
   }
 
+  handleChangeSearch = value => {
+    this.setState({ searchValue: value })
+  }
+
   render() {
-    const { todoData } = this.state
+    const { todoData, searchValue } = this.state
+    const visibleList = this.findItems(todoData, searchValue)
 
     const doneTotalCount = todoData.filter(item => item.isDone).length
     const todoTotalCount = todoData.length - doneTotalCount
@@ -79,12 +97,12 @@ class App extends React.Component {
         <AppHeader toDo={todoTotalCount} done={doneTotalCount} />
 
         <div className="top-panel d-flex">
-          <SearchPanel />
+          <SearchPanel onChangeSearch={this.handleChangeSearch} />
           <ItemStatusFilter />
         </div>
 
         <TodoList
-          todoItems={todoData}
+          todoItems={visibleList}
           onDeleteItem={this.handleDeleteItem}
           onToggleDone={this.handleToggleDone}
           onToggleImportant={this.handleToggleImportant}
