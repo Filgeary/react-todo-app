@@ -9,13 +9,14 @@ import './App.css'
 class App extends React.Component {
   state = {
     todoData: [
-      { id: 1, label: 'Learn JavaScript', isImportant: true, isDone: false },
+      { id: 1, label: 'Learn JavaScript', isImportant: true, isDone: true },
       { id: 2, label: 'Learn React', isImportant: true, isDone: false },
       { id: 3, label: 'Learn Redux', isImportant: true, isDone: false },
       { id: 4, label: 'Make Tests', isImportant: false, isDone: false },
       { id: 5, label: 'Learn TypeScript', isImportant: false, isDone: false },
     ],
     searchValue: '',
+    filterValue: 'all',
   }
 
   // helpers
@@ -35,6 +36,22 @@ class App extends React.Component {
     return itemsList.filter(item => {
       return item.label.toLowerCase().includes(searchValue.toLowerCase())
     })
+  }
+
+  filterItems = (itemsList, filterValue) => {
+    switch (filterValue) {
+      case 'all':
+        return itemsList
+
+      case 'active':
+        return itemsList.filter(item => !item.isDone)
+
+      case 'done':
+        return itemsList.filter(item => item.isDone)
+
+      default:
+        return itemsList
+    }
   }
 
   // handlers
@@ -85,9 +102,17 @@ class App extends React.Component {
     this.setState({ searchValue: value })
   }
 
+  handleChangeFilter = value => {
+    this.setState({ filterValue: value })
+  }
+
   render() {
-    const { todoData, searchValue } = this.state
-    const visibleList = this.findItems(todoData, searchValue)
+    const { todoData, searchValue, filterValue } = this.state
+
+    const visibleList = this.filterItems(
+      this.findItems(todoData, searchValue),
+      filterValue,
+    )
 
     const doneTotalCount = todoData.filter(item => item.isDone).length
     const todoTotalCount = todoData.length - doneTotalCount
@@ -98,7 +123,10 @@ class App extends React.Component {
 
         <div className="top-panel d-flex">
           <SearchPanel onChangeSearch={this.handleChangeSearch} />
-          <ItemStatusFilter />
+          <ItemStatusFilter
+            filterValue={filterValue}
+            onChangeFilter={this.handleChangeFilter}
+          />
         </div>
 
         <TodoList
