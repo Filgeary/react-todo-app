@@ -20,6 +20,7 @@ const TodoListItem = ({
         className="todo-list-item-label"
         tabIndex="0"
         onClick={onToggleDone}
+        title={`Mark as ${isDone ? 'Not Done' : 'Done'}`}
       >
         {label}
       </span>
@@ -28,6 +29,7 @@ const TodoListItem = ({
         <button
           type="button"
           className="btn btn-outline-success btn-sm "
+          title={`Mark as ${isImportant ? 'Not Important' : 'Important'}`}
           onClick={onToggleImportant}
         >
           <i className="fa fa-exclamation" />
@@ -35,6 +37,7 @@ const TodoListItem = ({
         <button
           type="button"
           className="btn btn-outline-danger btn-sm "
+          title="Delete Task"
           onClick={onDeleteItem}
         >
           <i className="fa fa-trash-o"></i>
